@@ -1,0 +1,65 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+<div class="card card-post-detail">
+    <div class="card-body">
+        <h1 class="posttitle loader">{{ post.title }}</h1>
+        <div class="date postdate">
+            {% if post.published_date %}
+                Posted by {{ post.author }} on {{ post.published_date }}
+            {% else %}
+                <a class="btn btn-warning" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+            {% endif %}
+        </div>
+
+        <p class="card-text postcontent">{{ post.text|safe|linebreaksbr }}</p>
+
+        {% if user.is_authenticated %}
+        <div class="edit-delete-container">
+            <a class="btn btn-primary btn-sm" href="{% url 'post_edit' pk=post.pk %}">
+                <i class="material-icons">
+                    edit
+                </i>
+            </a>
+            <a class="btn btn-primary btn-sm" href="{% url 'post_remove' pk=post.pk %}">
+                <i class="material-icons">
+                    close
+                </i>
+            </a>              
+        </div>
+        {% endif %}
+        <div class="text-right">
+            <a class="btn btn-primary btn-comment" href="{% url 'add_comment_to_post' pk=post.pk %}">Add Comment</a>
+        </div>
+    </div>
+    
+    <hr>
+    
+    <div class="container">
+        {% for comment in post.comments.all %}
+            {% if user.is_authenticated or comment.approved_comment %}
+                <div class="comment-detail">
+                    <span class="commented-by font-weight-bold">{{ comment.author }}</span><span class="text-muted"> · {{ comment.create_date }}</span>
+                    
+                    {% if not comment.approved_comment %}
+                    <a class="btn btn-primary btn-sm" href="{% url 'comment_remove' pk=comment.pk %}">
+                        <i class="material-icons">
+                            close
+                        </i>
+                    </a>
+                    <a class="btn btn-primary btn-sm" href="{% url 'comment_approve' pk=comment.pk %}">
+                        <i class="material-icons">
+                            check
+                        </i>
+                    </a>
+                    {% endif %}
+
+                    <p>{{ comment.text|safe }}</p>
+                </div>
+            {% endif %}
+            {% empty %}
+            <p>No Comments</p>
+        {% endfor %}
+    </div>
+    {% endblock %}
+</div>

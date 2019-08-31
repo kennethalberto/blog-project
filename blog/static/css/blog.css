@@ -1,0 +1,59 @@
+body {
+	background: #FAFAFA;
+}
+
+.techfont {
+	font-family: 'Roboto', sans-serif;
+	margin-bottom: 10px;
+}
+
+.centerstage {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.postdate {
+	text-align: center;
+}
+
+.posttitle {
+	font-family: 'Roboto', sans-serif;
+	font-size: 3em;
+	text-align: center;
+}
+
+.postcontent {
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.5em;
+}
+
+.post {
+	margin-bottom: 10px;
+}
+
+.post:hover {
+	border: 1px solid rgb(71, 71, 71);
+}
+
+.card-post-detail {
+	padding: 10px;
+}
+
+.edit-delete-container {
+	position: absolute;
+}
+
+.btn-comment {
+	position: relative;
+	right: 0;
+}
+
+.commented-by {
+	color: #1E88E5;
+}
+
+a.custom-card,
+a.custom-card:hover {
+  color: inherit;
+  text-decoration: none;
+}
