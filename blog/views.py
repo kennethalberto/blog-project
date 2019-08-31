@@ -10,6 +10,7 @@ from django.views.generic import (
     DetailView, CreateView,
     UpdateView, DeleteView
 )
+from braces.views import SelectRelatedMixin
 
 class AboutView(TemplateView):
     template_name = 'blog/about.html'
@@ -29,6 +30,12 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     form_class = PostForm
     model = Post
 
+    def form_valid(self, form):
+        self.object = form.save(commit = False)
+        self.object.author = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+        
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
     redirect_field_name = 'blog/post_detail.html'
