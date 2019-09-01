@@ -41,7 +41,7 @@
                         <a class="nav-link" href="{% url 'about' %}">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://www.github.com">Github</a>
+                        <a class="nav-link" href="https://github.com/kennethalberto/blog-project">Github</a>
                     </li>
                 </ul>
 
@@ -58,7 +58,7 @@
                                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link">Welcome: {{ user.username }}</a>
+                                <a class="nav-link">{{ user.username }}</a>
                             </li>
                         {% else %}
                             <li class="nav-item">
